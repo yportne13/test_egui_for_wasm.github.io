@@ -16,7 +16,8 @@ fn parsing_line((signal,identify_table,clock): (Vec<Signal>,Vec<Vec<i32>>,i32), 
             let size = line_item.next().unwrap().parse::<usize>().unwrap();
             let _identify = line_item.next().unwrap();
             let name = line_item.next().unwrap().to_string();
-            let new_signal = Signal{name,size,value_change: vec![]};
+            let name_with_width = if size==1 {name} else {format!("{}[{}:0]",name,size-1)};
+            let new_signal = Signal{name:name_with_width,size,value_change: vec![]};
             let signal_out = signal.into_iter().chain(vec![new_signal]).collect();//[signal,&vec![]].concat();
             (signal_out,identify_table,clock)
         },

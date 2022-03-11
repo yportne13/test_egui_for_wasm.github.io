@@ -111,7 +111,8 @@ impl epi::App for TemplateApp {
                 });
             }
 
-            ui.label((&self.signals).iter().map(|s| &s.name).fold("".to_string(),|s1,s2| format!("{}\n{}",s1,s2)));
+            ui.label((&self.signals).iter().map(|s| &s.name)
+                                    .fold("".to_string(),|s1,s2| format!("{}{}\n",s1,s2)));
 
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 ui.horizontal(|ui| {
@@ -127,7 +128,8 @@ impl epi::App for TemplateApp {
         egui::CentralPanel::default().show(ctx, |ui| {
             // The central panel the region left after adding TopPanel's and SidePanel's
 
-            ui.label((&self.signals).iter().map(|s| &s.name).fold("".to_string(),|s1,s2| format!("{}{}\n",s1,s2)));
+            ui.label((&self.signals).iter().map(|s| &s.name)
+                                    .fold("".to_string(),|s1,s2| format!("{}{}\n",s1,s2)));
 
             egui::warn_if_debug_build(ui);
         });
